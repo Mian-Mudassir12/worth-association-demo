@@ -302,6 +302,8 @@ header.site nav.main button[aria-current="page"]{background:linear-gradient(135d
 #sp.go{animation:cl .95s cubic-bezier(.7,0,.2,1) forwards;pointer-events:none}#sp.go .sw,#sp.go .sk{opacity:0;transition:opacity .25s}
 @keyframes cl{from{clip-path:circle(150vmax at calc(100% - 40px) calc(100% - 40px))}to{clip-path:circle(0 at calc(100% - 40px) calc(100% - 40px))}}
 @media(prefers-reduced-motion:reduce){#sp.go{animation:none;opacity:0;transition:opacity .3s}}
+/* Safety net: if the dismiss script ever fails to run, the splash fades itself out instead of covering the page forever. The script normally removes it well before this fires, and the .go exit animation overrides this rule. */
+#sp{animation:spfb .5s ease 5.2s forwards}@keyframes spfb{to{opacity:0;visibility:hidden}}
 </style>
 <style id="brand5">
 /* Real WORTH brand match: warm salmon top bar, orange to hot pink hero gradient, terracotta and rose palette, rectangular buttons, geometric sans headings, Educate Elevate Engage tagline */
@@ -334,7 +336,11 @@ footer.site{background:#33121f}
 .mentor-card .avatar{width:54px;height:54px;font-size:1.05rem;background:linear-gradient(140deg,#e8855a,#c2435f)}
 </style>
 </head>
-<body>
+<body style="overflow:hidden">
+
+<!-- WORTH intro splash: rendered as the very first thing in the body so it is on screen from the first paint, before any home page content can flash through. The script at the end of the page only dismisses it. -->
+<div id="sp" role="status" aria-label="Welcome to WORTH Association"><div class="sw"><div class="sl"><b style="animation-delay:.15s">W</b><b style="animation-delay:.23s">O</b><b style="animation-delay:.31s">R</b><b style="animation-delay:.39s">T</b><b style="animation-delay:.47s">H</b><i></i></div><p>Women of Recreation, Tourism &amp; Hospitality</p></div><span class="sk">Tap to skip</span></div>
+<noscript><style>#sp{display:none}body{overflow:auto !important}</style></noscript>
 
 <div class="topbar">Registration is open for the WORTH Winter Leadership Social, December 10 in Vancouver &amp; online. <button type="button" data-go="events" style="background:none;border:0;color:#f0c987;font-weight:800;cursor:pointer;text-decoration:underline;min-height:32px">See events →</button></div>
 
@@ -1020,11 +1026,10 @@ lg.onsubmit=function(e){e.preventDefault();var p=lg.querySelector('p');if(lg.que
 document.body.appendChild(lg);lg.querySelector('#lp').focus()};
 document.addEventListener('keydown',function(e){if(e.key==='Escape')shut()});
 function act(){$$('#mbar button').forEach(function(b){b.classList.toggle('on',b.dataset.t===cur)})}act();
-var sp=document.createElement('div');sp.id='sp';sp.setAttribute('role','status');sp.setAttribute('aria-label','Welcome to WORTH Association');
-sp.innerHTML='<div class="sw"><div class="sl">'+'WORTH'.split('').map(function(c,i){return '<b style="animation-delay:'+(.15+i*.08)+'s">'+c+'</b>'}).join('')+'<i></i></div><p>Women of Recreation, Tourism &amp; Hospitality</p></div><span class="sk">Tap to skip</span>';
-document.body.appendChild(sp);document.body.style.overflow='hidden';
-var sd=0;function spx(){if(sd)return;sd=1;sp.classList.add('go');setTimeout(function(){sp.remove();document.body.style.overflow=''},rm?350:1000)}
-sp.onclick=spx;setTimeout(spx,2700);document.addEventListener('keydown',function(e){if(e.key==='Escape')spx()});
+/* The splash markup now lives at the top of <body> (see #sp there) so it paints before the home page; this script only dismisses it. */
+var sp=document.getElementById('sp');
+var sd=0;function spx(){if(sd)return;sd=1;if(!sp){document.body.style.overflow='';return}sp.classList.add('go');setTimeout(function(){sp.remove();document.body.style.overflow=''},rm?350:1000)}
+if(sp){sp.onclick=spx;setTimeout(spx,2700);document.addEventListener('keydown',function(e){if(e.key==='Escape')spx()});}else{document.body.style.overflow=''}
 document.addEventListener('focusout',function(e){if(document.body.classList.contains('cms')&&e.target.classList&&e.target.classList.contains('cms-ed')){sv.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){sv.classList.remove('on')},1600)}});
 })();
 </script>
