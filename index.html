@@ -146,7 +146,7 @@ nav.main button[aria-current="page"]{background:var(--wine);color:#fff}
 .chip[aria-pressed="true"]{background:var(--wine);border-color:var(--wine);color:#fff}
 form .field{margin-bottom:1rem}
 label{font-weight:700;display:block;margin-bottom:.35rem;font-size:.95rem}
-input[type="text"],input[type="email"],input[type="url"],input[type="date"],select,textarea{width:100%;padding:.7rem .85rem;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);min-height:48px}
+input[type="text"],input[type="email"],input[type="password"],input[type="url"],input[type="date"],select,textarea{width:100%;padding:.7rem .85rem;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);min-height:48px}
 textarea{min-height:110px}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 @media(max-width:640px){.frow{grid-template-columns:1fr}}
@@ -1057,10 +1057,10 @@ function shut(){if(lg){lg.remove();lg=0}}
 lo.onclick=function(){if(ad){adm(false);note('Logged out');return}
 if(lg){shut();return}
 lg=document.createElement('form');lg.style.cssText='position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:500;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:1.4rem;width:min(92vw,340px);box-shadow:0 24px 60px rgba(0,0,0.4)';
-lg.innerHTML='<button type="button" id="lgClose" aria-label="Close dialog" style="position:absolute;right:12px;top:12px;width:44px;height:44px;border-radius:50%;border:2px solid var(--wine-deep);background:var(--wine);color:#fff;display:grid;place-items:center;cursor:pointer;font-size:1.15rem;font-weight:800;line-height:1;box-shadow:0 4px 14px rgba(92,33,48,.35);padding:0">✕</button><h3 style="font-size:1.2rem;padding-right:3rem">WORTH staff login</h3><p class="meta" style="margin:.3rem 0.8rem">Demo only. On the live site, staff sign in with their WORTH account before editing.</p><button class="btn gold" type="submit" style="width:100%;margin-top:.8rem">Log in</button>';
+lg.innerHTML='<button type="button" id="lgClose" aria-label="Close dialog" style="position:absolute;right:12px;top:12px;width:44px;height:44px;border-radius:50%;border:2px solid var(--wine-deep);background:var(--wine);color:#fff;display:grid;place-items:center;cursor:pointer;font-size:1.15rem;font-weight:800;line-height:1;box-shadow:0 4px 14px rgba(92,33,48,.35);padding:0">✕</button><h3 style="font-size:1.2rem;padding-right:3rem">WORTH staff login</h3><p class="meta" style="margin:.3rem 0.8rem">Demo only. On the live site, staff sign in with their WORTH account before editing.</p><div class="field" style="margin-top:.6rem"><label for="lgPw">Password</label><input type="password" id="lgPw" autocomplete="current-password" required></div><p class="meta" style="margin:.45rem 0 0">Demo password: <b>worth2027</b></p><p id="lgErr" class="meta" role="alert" style="display:none;color:var(--wine);font-weight:700;margin:.45rem 0 0">Wrong password, please try again.</p><button class="btn gold" type="submit" style="width:100%;margin-top:.8rem">Log in</button>';
 lg.querySelector('#lgClose').addEventListener('click',shut);
-lg.onsubmit=function(e){e.preventDefault();shut();adm(true);note('✓ Logged in as WORTH staff')};
-document.body.appendChild(lg);lg.querySelector('button[type="submit"]').focus()};
+lg.onsubmit=function(e){e.preventDefault();var pw=lg.querySelector('#lgPw');if(pw.value==='worth2027'){shut();adm(true);note('✓ Logged in as WORTH staff')}else{lg.querySelector('#lgErr').style.display='block';pw.value='';pw.focus()}};
+document.body.appendChild(lg);lg.querySelector('#lgPw').focus()};
 document.addEventListener('keydown',function(e){if(e.key==='Escape')shut()});
 function act(){$$('#mbar button').forEach(function(b){b.classList.toggle('on',b.dataset.t===cur)})}act();
 /* Splash dismissal is handled by the small script directly after the splash markup at the top of <body>, which runs as soon as the splash is parsed and sets window.__worthSplashArmed. Only if that marker is missing (the early script never executed) is the splash removed here, instantly and with no exit animation — replaying the animation this late would pop the splash back over the home page. When the marker is present, the splash is left alone: the early script dismisses it on its own schedule. */
