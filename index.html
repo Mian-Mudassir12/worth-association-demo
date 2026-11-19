@@ -208,7 +208,8 @@ footer.site li button{background:none;border:0;color:#f0c987;cursor:pointer;padd
 .modal .sub{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
 .modal-close{position:absolute}
 .modal-wrap{position:relative}
-.modal-x{position:absolute;right:0;top:0;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:1.1rem;line-height:1}
+.modal-x{position:absolute;right:0;top:0;width:44px;height:44px;border-radius:50%;border:2px solid var(--wine-deep);background:var(--wine);color:#fff;display:grid;place-items:center;cursor:pointer;font-size:1.15rem;font-weight:800;line-height:1;box-shadow:0 4px 14px rgba(92,33,48,.35);z-index:2;padding:0}
+.modal-x:hover{background:var(--wine-deep)}
 .modal .field{margin-bottom:.9rem}
 .modal-success{display:none;text-align:center;padding:1rem 0 .2rem}
 .modal-success .tick{width:64px;height:64px;border-radius:50%;background:var(--sage);color:#fff;font-size:1.9rem;display:grid;place-items:center;margin:0 auto 1rem}
@@ -349,6 +350,9 @@ header.site nav.main button[aria-current="page"]{background:var(--wine)!importan
 .mentor-card .avatar{background:var(--wine)!important}
 .avatar{background:var(--sage)}
 .btn.gold{background:var(--gold)!important;border-color:var(--gold)!important}
+/* Dialog close cross: a filled wine circle with a white cross, so it stays clearly visible on the white dialog in light mode and on the dark dialog in dark mode. Earlier it was a white circle with a near white border and no set text colour, so in light mode it blended into the dialog and the cross could not be seen. */
+.modal-x{background:var(--wine)!important;color:#fff!important;border:2px solid var(--wine-deep)!important}
+.modal-x:hover{background:var(--wine-deep)!important}
 </style>
 </head>
 <body style="overflow:hidden">
@@ -1053,7 +1057,8 @@ function shut(){if(lg){lg.remove();lg=0}}
 lo.onclick=function(){if(ad){adm(false);note('Logged out');return}
 if(lg){shut();return}
 lg=document.createElement('form');lg.style.cssText='position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:500;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:1.4rem;width:min(92vw,340px);box-shadow:0 24px 60px rgba(0,0,0.4)';
-lg.innerHTML='<h3 style="font-size:1.2rem">WORTH staff login</h3><p class="meta" style="margin:.3rem 0.8rem">Demo only. Password: worth2027</p><input type="password" id="lp" aria-label="Password" autocomplete="off" style="width:100%;padding:.7rem;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);min-height:46px"><button class="btn gold" type="submit" style="width:100%;margin-top:.8rem">Log in</button>';
+lg.innerHTML='<button type="button" id="lgClose" aria-label="Close dialog" style="position:absolute;right:12px;top:12px;width:44px;height:44px;border-radius:50%;border:2px solid var(--wine-deep);background:var(--wine);color:#fff;display:grid;place-items:center;cursor:pointer;font-size:1.15rem;font-weight:800;line-height:1;box-shadow:0 4px 14px rgba(92,33,48,.35);padding:0">✕</button><h3 style="font-size:1.2rem;padding-right:3rem">WORTH staff login</h3><p class="meta" style="margin:.3rem 0.8rem">Demo only. Password: worth2027</p><input type="password" id="lp" aria-label="Password" autocomplete="off" style="width:100%;padding:.7rem;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);min-height:46px"><button class="btn gold" type="submit" style="width:100%;margin-top:.8rem">Log in</button>';
+lg.querySelector('#lgClose').addEventListener('click',shut);
 lg.onsubmit=function(e){e.preventDefault();var p=lg.querySelector('p');if(lg.querySelector('#lp').value==='worth2027'){shut();adm(true);note('✓ Logged in as WORTH staff')}else{p.textContent='Wrong password, try again.';p.style.color='#b3261e'}};
 document.body.appendChild(lg);lg.querySelector('#lp').focus()};
 document.addEventListener('keydown',function(e){if(e.key==='Escape')shut()});
