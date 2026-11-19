@@ -306,22 +306,22 @@ header.site nav.main button[aria-current="page"]{background:linear-gradient(135d
 #sp{animation:spfb .5s ease 5.2s forwards}@keyframes spfb{to{opacity:0;visibility:hidden}}
 </style>
 <style id="brand5">
-/* Real WORTH brand match: warm salmon top bar, orange to hot pink hero gradient, terracotta and rose palette, rectangular buttons, geometric sans headings, Educate Elevate Engage tagline */
+/* WORTH brand: flat solid colours only — deep wine, terracotta and warm neutrals, rectangular buttons, geometric sans headings, Educate Elevate Engage tagline. No gradients anywhere: a flat, editorial nonprofit look. */
 :root{--bg:#faf5f1;--surface:#ffffff;--surface2:#f7eae3;--ink:#2e2226;--muted:#71565c;--wine:#b33757;--wine-deep:#87264a;--gold:#dd6f4d;--gold-soft:#fbe7da;--sage:#3f7d6b;--line:#eedbd2}
 @media (prefers-color-scheme: dark){:root{--bg:#221417;--surface:#2f1d22;--surface2:#3a252a;--ink:#f7ece7;--muted:#d3b8b0;--line:#54383f;--gold-soft:#4d3226}}
 h1,h2,h3,.serif{font-family:"Jost","Nunito Sans",system-ui,sans-serif;font-weight:600}
 .brand b{font-family:"Jost",sans-serif;font-weight:700}
 .topbar{background:#e08a72;color:#fff}
-.hero .veil{background:linear-gradient(94deg,rgba(221,111,77,.93) 0%,rgba(214,64,105,.89) 55%,rgba(160,32,86,.86) 100%)}
-.pagehead{background:linear-gradient(120deg,var(--wine-deep),var(--wine) 58%,var(--gold))}
+.hero .veil{background:rgba(67,18,32,.78)}
+.pagehead{background:var(--wine-deep)}
 .btn{border-radius:6px}
 .btn.gold{background:var(--gold);border-color:var(--gold)}
 .btn.gold:hover{background:#c85a38;border-color:#c85a38}
-.brand-mark{background:linear-gradient(140deg,#f0915c,#e2497f 60%,#b33757)!important;color:#fff!important}
-.join-btn{background:linear-gradient(135deg,#f0915c,#e2497f)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 8px 20px rgba(214,64,105,.38)}
-#sp{background:linear-gradient(140deg,#e8855a,#d6336c 58%,#87264a)!important}
+.brand-mark{background:var(--wine)!important;color:#fff!important}
+.join-btn{background:#c85a38!important;border-color:#c85a38!important;color:#fff!important;box-shadow:0 8px 20px rgba(92,33,48,.28)}
+#sp{background:#4a1626!important}
 #sp .sl{font-family:"Jost",sans-serif;font-weight:600}
-#prog{background:linear-gradient(90deg,var(--gold),#d6336c)}
+#prog{background:var(--wine)}
 footer.site{background:#33121f}
 .brandline{letter-spacing:.3em;text-transform:uppercase;font-weight:700;font-size:.92rem;color:#ffe0bd!important;margin:.9rem 0 0}
 .status-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:1rem 0}
@@ -333,7 +333,22 @@ footer.site{background:#33121f}
 .event-detail{display:none;border-top:1px dashed var(--line);margin-top:.9rem;padding-top:.9rem;color:var(--muted);font-size:.95rem}
 .event-detail.open{display:block}
 .event-detail ul{margin:.3rem 0 .8rem;padding-left:1.1rem}
-.mentor-card .avatar{width:54px;height:54px;font-size:1.05rem;background:linear-gradient(140deg,#e8855a,#c2435f)}
+.mentor-card .avatar{width:54px;height:54px;font-size:1.05rem;background:var(--wine)}
+</style>
+<style id="flat-final">
+/* Flat finish: every surface is one solid WORTH colour, no gradient blends anywhere. This block wins over all earlier rules. */
+.hero .veil{background:rgba(67,18,32,.78)!important}
+.pagehead{background:var(--wine-deep)!important}
+.pagehead::after{background:none!important}
+#sp{background:#4a1626!important}
+#prog{background:var(--wine)!important}
+.brand-mark{background:var(--wine)!important}
+header.site nav.main button[aria-current="page"]{background:var(--wine)!important}
+.join-btn{background:#c85a38!important;border-color:#c85a38!important;color:#fff!important}
+#mbar button[data-t="join"] span{background:#c85a38!important;color:#fff!important}
+.mentor-card .avatar{background:var(--wine)!important}
+.avatar{background:var(--sage)}
+.btn.gold{background:var(--gold)!important;border-color:var(--gold)!important}
 </style>
 </head>
 <body style="overflow:hidden">
